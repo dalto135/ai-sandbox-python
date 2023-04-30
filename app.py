@@ -13,12 +13,24 @@ def index():
         response = openai.Completion.create(
             model="text-davinci-003",
             prompt=generate_prompt(prompt),
+            # prompt=prompt.capitalize(),
+            # n=2,
+            # max_tokens=100,
             temperature=0.6,
         )
-        return redirect(url_for("index", result=response.choices[0].text))
+        def getText(response):
+            return response["text"]
+
+        text_map = map(getText, response["choices"])
+        text_result = list(text_map)
+        # text_result = response["choices"][0]
+        print("RESULT")
+        print(text_result)
+        return redirect(url_for("index", result=text_result))
+        # return redirect(url_for("index", result=response.choices[0].text))
 
     result = request.args.get("result")
-    return render_template("index.html", result=result)
+    return render_template("index.html", len=1, result=result)
 
 def generate_prompt(prompt):
     return """

@@ -15,7 +15,8 @@
     <input type="text" name="prompt" placeholder="Enter an animal" required />
     <input type="submit" value="Generate names" />
   </form>
-  {% if result %}
-  <div class="result">{{ result }}</div>
-  {% endif %}
+
+  {%for i in range(0, len)%}
+    <div class="result">{{ result }}</div>
+  {%endfor%}
 </body>
